@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "pmkg-shion"
+version = "0.1.0"
+description = "A personal machine learning experimentation framework"
+authors = ["Pramook Khungurn <pramook@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [
+    {include = "shion", from = "src"}
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+numpy = "^1.24.1"
+pillow = "^9.4.0"
+pmkg-pytasuku = {git = "https://github.com/pkhungurn/pytasuku.git", rev = "v0.1.0"}
+torch = "^1.13.1"
+torchvision = "^0.14.1"
+tensorboard = "^2.11.0"
+
+[tool.poetry.group.dev.dependencies]
+torch = {url = "https://download.pytorch.org/whl/cu116/torch-1.13.1%2Bcu116-cp38-cp38-win_amd64.whl"}
+torchvision = {url = "https://download.pytorch.org/whl/cu116/torchvision-0.14.1%2Bcu116-cp38-cp38-win_amd64.whl"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
