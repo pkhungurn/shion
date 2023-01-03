@@ -1,2 +1,3 @@
 # shion
-My personal machine learning experimentation, designed to work with PyTorch.
+
+`shion` (シオン) is my personal machine learning experimentation, designed to work with PyTorch.
