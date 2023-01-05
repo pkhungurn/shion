@@ -38,4 +38,5 @@ poetry add git+https://github.com/pkhungurn/shion.git
 
 ## Update History
 
+* (2022/01/05) v0.1.1: Allow specifying dependencies of training tasks. 
 * (2022/01/05) v0.1.0: First release.
