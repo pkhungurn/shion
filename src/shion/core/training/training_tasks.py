@@ -242,7 +242,8 @@ class TrainingTasks:
             pretrained_module_file_names: Dict[str, str],
             example_per_snapshot: int,
             device: torch.device,
-            num_data_loader_workers: int = 8):
+            num_data_loader_workers: int = 8,
+            dependencies: Optional[List[str]] = None):
         super().__init__()
         self.num_data_loader_workers = num_data_loader_workers
         self.accumulators = accumulators
@@ -277,12 +278,14 @@ class TrainingTasks:
         self.log_dir = None
         self.training_state = None
 
+        if dependencies is None:
+            dependencies = []
         self.sample_output_data_task = workspace.create_file_task(
-            self.get_sample_output_data_file_name(), [], self.save_sample_output_data)
+            self.get_sample_output_data_file_name(), dependencies, self.save_sample_output_data)
 
-        dependencies = [self.sample_output_data_task.name]
+        module_file_dependencies = [self.sample_output_data_task.name]
         for module_name in pretrained_module_file_names:
-            dependencies.append(self.pretrained_module_file_names[module_name])
+            module_file_dependencies.append(self.pretrained_module_file_names[module_name])
 
         def create_train_func(target_examples: int):
             return lambda: self.train(target_examples)
@@ -295,7 +298,7 @@ class TrainingTasks:
                     module_name)
                 workspace.create_file_task(
                     module_file_name,
-                    dependencies,
+                    module_file_dependencies,
                     create_train_func(self.checkpoint_examples[checkpoint_index]))
             for module_name in self.accumulators:
                 accumulated_module_file_name = TrainingState.get_accumulated_module_file_name(
@@ -303,17 +306,17 @@ class TrainingTasks:
                     module_name)
                 workspace.create_file_task(
                     accumulated_module_file_name,
-                    dependencies,
+                    module_file_dependencies,
                     create_train_func(self.checkpoint_examples[checkpoint_index]))
             workspace.create_command_task(
                 self.get_checkpoint_prefix(checkpoint_index) + "/train",
-                dependencies,
+                module_file_dependencies,
                 create_train_func(self.checkpoint_examples[checkpoint_index]))
             train_tasks.append(self.get_checkpoint_prefix(checkpoint_index) + "/train")
 
         self.train_task = workspace.create_file_task(
             self.get_train_command_name(),
-            dependencies,
+            module_file_dependencies,
             create_train_func(self.checkpoint_examples[-1]))
 
     def get_sample_output_data_file_name(self):

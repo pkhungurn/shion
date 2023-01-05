@@ -1,12 +1,14 @@
 [tool.poetry]
 name = "pmkg-shion"
-version = "0.1.0"
+version = "0.1.1"
 description = "A personal machine learning experimentation framework"
 authors = ["Pramook Khungurn <pramook@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [
-    {include = "shion", from = "src"}
+    {include = "shion/core", from = "src"},
+    {include = "shion/base", from = "src"},
+    {include = "shion/nn00", from = "src"},
 ]
 
 [tool.poetry.dependencies]
