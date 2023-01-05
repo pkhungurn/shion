@@ -6,9 +6,7 @@ authors = ["Pramook Khungurn <pramook@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [
-    {include = "core", from = "src/shion"},
-    {include = "base", from = "src/shion"},
-    {include = "nn00", from = "src/shion"},
+    {include = "shion", from = "src"},
 ]
 
 [tool.poetry.dependencies]
