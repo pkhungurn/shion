@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pmkg-shion"
-version = "0.1.1"
+version = "0.1.2"
 description = "A personal machine learning experimentation framework"
 authors = ["Pramook Khungurn <pramook@gmail.com>"]
 license = "MIT"
