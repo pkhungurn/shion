@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pmkg-shion"
-version = "0.1.2"
+version = "0.1.3"
 description = "A personal machine learning experimentation framework"
 authors = ["Pramook Khungurn <pramook@gmail.com>"]
 license = "MIT"
@@ -13,7 +13,7 @@ packages = [
 python = "^3.8"
 numpy = "^1.24.1"
 pillow = "^9.4.0"
-pmkg-pytasuku = {git = "https://github.com/pkhungurn/pytasuku.git", rev = "v0.1.0"}
+pmkg-pytasuku = {git = "https://github.com/pkhungurn/pytasuku.git"}
 torch = "^1.13.1"
 torchvision = "^0.14.1"
 tensorboard = "^2.11.0"
