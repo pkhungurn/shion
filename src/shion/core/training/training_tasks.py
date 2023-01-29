@@ -2,7 +2,7 @@ import logging
 import os
 import time
 from datetime import datetime
-from typing import Optional, Dict, Callable
+from typing import Optional, Dict, Callable, List
 
 import torch
 from torch.nn import Module
