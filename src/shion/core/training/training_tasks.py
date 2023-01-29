@@ -108,7 +108,7 @@ class TrainingState:
 
         modules = {
             module_name: factory.create()
-            for (module_name, factory) in module_factories
+            for (module_name, factory) in module_factories.items()
         }
         for module_name in modules:
             file_name = TrainingState.get_module_file_name(prefix, module_name)
